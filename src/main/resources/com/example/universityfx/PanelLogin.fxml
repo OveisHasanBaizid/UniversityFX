@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.universityfx.PanelLogin"
+      prefHeight="500.0" prefWidth="500.0">
+    <Label layoutX="159.0" layoutY="52.0" text="choice mode state">
+        <font>
+            <Font name="Calibri Bold" size="24.0"/>
+        </font>
+    </Label>
+    <Button fx:id="btnGod" onAction="#clickBtnGod" layoutX="190.0" layoutY="150.0" mnemonicParsing="false"
+            prefHeight="30.0" prefWidth="120.0" text="God"/>
+    <Button fx:id="btnStudent" onAction="#clickBtnStudent" layoutX="190.0" layoutY="210.0" mnemonicParsing="false"
+            prefHeight="30.0" prefWidth="120.0" text="Student"/>
+    <Button fx:id="btnProfessor" onAction="#clickBtnProfessor" layoutX="190.0" layoutY="270.0" mnemonicParsing="false"
+            prefHeight="30.0" prefWidth="120.0" text="Professor"/>
+    <Button fx:id="btnDepartmentOfficer" onAction="#clickBtnDepartmentOfficer" layoutX="190.0" layoutY="330.0"
+            mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Department officer"/>
+    <Button fx:id="btnExit" onAction="#clickBtnExit" layoutX="190.0" layoutY="390.0" mnemonicParsing="false"
+            prefHeight="30.0" prefWidth="120.0" text="Exit"/>
+</Pane>
