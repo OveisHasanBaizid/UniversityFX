@@ -1,8 +1,5 @@
 package com.example.universityfx;
 
-import com.example.universityfx.Models.DataBase;
-import com.example.universityfx.Models.Department;
-import com.example.universityfx.Models.Student;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -12,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -25,9 +23,18 @@ public class PanelLogin {
     public void clickBtnProfessor() {
 
     }
+    public void temp(){
+        Department department = new Department("KCSnk","1");
+        Student student = new Student("9817023116","Oveis", LocalDate.now(),department);
+        Professor professor = new Professor("professor1",LocalDate.now(),department,AcademicRank.PROFESSOR);
+        Course course = new Course("Course1",4,department,professor);
+        DataBase.courses.add(course);
+        DataBase.students.add(student);
+        DataBase.gradeReports.add(new GradeReport(student,course));
+    }
     @FXML
     public void clickBtnStudent() throws IOException {
-        DataBase.students.add(new Student("9817023116","Oveis", LocalDate.now(),new Department("KCSnk","1")));
+        temp();
         String[] info = display();
         Student student = DataBase.getStudent(info[1]);
         if (student==null)
@@ -94,7 +101,11 @@ public class PanelLogin {
     }
     public void showMessage(String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(message);
+        alert.initStyle(StageStyle.UTILITY);
+        alert.getDialogPane().setPrefSize(300, 100);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

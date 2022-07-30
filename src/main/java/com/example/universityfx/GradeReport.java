@@ -1,8 +1,8 @@
-package com.example.universityfx.Models;
+package com.example.universityfx;
 
 public class GradeReport {
-    private Student student;
-    private Course course;
+    private final Student student;
+    private final Course course;
     private double grade;
 
     public GradeReport(Student student, Course course) {

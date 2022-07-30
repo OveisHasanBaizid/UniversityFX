@@ -1,34 +1,48 @@
 package com.example.universityfx;
-import com.example.universityfx.Models.DataBase;
-import com.example.universityfx.Models.Department;
-import com.example.universityfx.Models.Student;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 public class MenuStudent {
     Student student;
     @FXML
-    Button btnExit, btnRemove , btnAdd;
+    Button btnExit, btnRemove, btnAdd;
     @FXML
-    TextField textField_Name , textField_stdNumber , textField_BirthDate , textField_Department;
+    TextField textField_Name, textField_stdNumber, textField_BirthDate, textField_Department;
+    @FXML
+    TableColumn column_name;
+    @FXML
+    TableColumn column_credits;
+    @FXML
+    TableColumn column_professor;
+    @FXML
+    TableColumn<GradeReport, Double> column_grade;
+    @FXML
+    TableView<GradeReport> table;
 
-    public void initialize(){
+    public void initialize() {
         student = DataBase.studentHolder;
 
         textField_Name.setText(student.getName());
         textField_stdNumber.setText(student.getStudent());
         textField_Department.setText(student.getDepartment().getName());
         textField_BirthDate.setText(student.getBirthDate().toString());
+        showTableMyCourse();
     }
+
     @FXML
     public void clickBtnExit() throws IOException {
         Stage stage = (Stage) btnExit.getScene().getWindow();
@@ -37,10 +51,166 @@ public class MenuStudent {
         stage.setScene(scene);
         stage.show();
     }
+
     @FXML
     public void clickBtnAdd() {
+        showDialog_1_input("Add Course");
     }
+
     @FXML
     public void clickBtnRemove() {
+        showDialog_1_input("Remove Course");
+    }
+
+    @FXML
+    public void clickBtnListCourse(){
+        Dialog dialog = new Dialog();
+        dialog.setHeaderText(null);
+        dialog.setResizable(true);
+        Label label1 = new Label("List of courses offered by the faculty: ");
+        TableView<Course> table = new TableView<>();
+        showListAllCourse(table);
+        GridPane grid = new GridPane();
+        grid.add(label1, 1, 1);
+        grid.add(table, 1, 2);
+        dialog.getDialogPane().setContent(grid);
+        ButtonType buttonTypeCANCEL = new ButtonType("Close", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeCANCEL);
+        dialog.showAndWait();
+    }
+
+    public void showListAllCourse(TableView<Course> table) {
+        table.setPrefWidth(300);
+
+        TableColumn<Course, String> column_name = new TableColumn<>("Name");
+        column_name.setPrefWidth(100);
+        column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+
+        TableColumn<Course, String> column_credits = new TableColumn<>("Credits");
+        column_credits.setPrefWidth(100);
+        column_credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
+
+        TableColumn<Course, String> column_instructor = new TableColumn<>("Instructor");
+        column_instructor.setPrefWidth(100);
+        column_instructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
+
+
+        table.getColumns().addAll(column_name, column_credits, column_instructor);
+
+        ObservableList<Course> data = FXCollections.observableArrayList(DataBase.getAllCoursesDepartment(student.getDepartment()));
+        table.setItems(data);
+    }
+
+    public void showTableMyCourse() {
+        column_grade.setCellValueFactory(new PropertyValueFactory<GradeReport, Double>("grade"));
+
+        column_professor.setCellValueFactory(new PropertyValueFactory<Course, String>("course"));
+        column_professor.setCellFactory(column -> new TableCell<GradeReport, Course>() {
+            @Override
+            protected void updateItem(Course course, boolean b) {
+                super.updateItem(course, b);
+                if (b || course == null)
+                    setText("");
+                else
+                    setText(course.getInstructor().getName());
+            }
+        });
+        column_credits.setCellValueFactory(new PropertyValueFactory<Course, Integer>("course"));
+        column_credits.setCellFactory(column -> new TableCell<GradeReport, Course>() {
+            @Override
+            protected void updateItem(Course course, boolean b) {
+                super.updateItem(course, b);
+                if (b || course == null)
+                    setText("");
+                else
+                    setText(String.valueOf(course.getCredits()));
+            }
+        });
+        column_name.setCellValueFactory(new PropertyValueFactory<Course, String>("course"));
+        column_name.setCellFactory(column -> new TableCell<GradeReport, Course>() {
+            @Override
+            protected void updateItem(Course course, boolean b) {
+                super.updateItem(course, b);
+                if (b || course == null)
+                    setText("");
+                else
+                    setText(course.getName());
+            }
+        });
+        table.setEditable(false);
+
+        ObservableList<GradeReport> data = FXCollections.observableArrayList(student.getGradeReports());
+
+        table.setItems(data);
+    }
+
+    public void showDialog_1_input(String m) {
+        Dialog dialog = new Dialog();
+        dialog.setHeaderText(null);
+        dialog.setTitle(m);
+        dialog.setResizable(true);
+        Label label1 = new Label("Name Course: ");
+        TextField text1 = new TextField();
+
+        GridPane grid = new GridPane();
+        grid.add(label1, 1, 1);
+        grid.add(text1, 2, 1);
+        dialog.getDialogPane().setContent(grid);
+
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCANCEL = new ButtonType("CANCEL", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeCANCEL);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeOk) {
+                return text1.getText();
+            }
+            return null;
+        });
+        Optional result = dialog.showAndWait();
+        result.ifPresent(pair -> {
+            if (m.equals("Add Course"))
+                addCourse(result.toString());
+            else
+                removeCourse(result.toString());
+        });
+    }
+
+    public void addCourse(String nameCourse) {
+        Course course = DataBase.getCourse(nameCourse);
+        if (student.getCourse().contains(course))
+            showMessage("You have already taken this course.", "Error");
+        else {
+            student.takeCourse(course);
+            showMessage("Lesson added successfully.", "Message");
+            showTableMyCourse();
+        }
+    }
+    public void removeCourse(String nameCourse) {
+        Course course = DataBase.getCourse(nameCourse);
+        if (course==null){
+            showMessage("The desired course is not available in list courses", "Error");
+        }else {
+            GradeReport gradeReport = student.getGradeReport(nameCourse);
+            if (gradeReport==null){
+                showMessage("The desired course is not available in your list of courses", "Error");
+            }else if(gradeReport.getGrade()!=-1){
+                showMessage("This lesson has already finished and it is not possible to delete it", "Error");
+            }else{
+                DataBase.gradeReports.remove(gradeReport);
+                showMessage("The desired lesson was successfully deleted.", "Message");
+                showTableMyCourse();
+            }
+        }
+    }
+    public void showMessage(String message, String type) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initStyle(StageStyle.UTILITY);
+        alert.getDialogPane().setPrefSize(300, 100);
+        alert.setTitle(type);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

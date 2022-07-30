@@ -1,11 +1,11 @@
-package com.example.universityfx.Models;
+package com.example.universityfx;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Student {
-    private String student;
+    private final String student;
     private String name;
     private LocalDate birthDate;
     private Department department;
@@ -56,7 +56,7 @@ public class Student {
         if (grade<0 || grade>20)
             return 1;
         for (GradeReport gradeReport:DataBase.gradeReports) {
-            if (gradeReport.getCourse().equals(course) && gradeReport.getStudent().equals(student)){
+            if (gradeReport.getCourse().equals(course) && gradeReport.getStudent().getStudent().equals(student)){
                 if (gradeReport.getGrade()!=-1)
                     return 2;
                 gradeReport.setGrade(grade);
@@ -65,7 +65,7 @@ public class Student {
         }
         return 0;
     }
-    public List<GradeReport> getGradeReport(){
+    public List<GradeReport> getGradeReports(){
         List<GradeReport> gradeReportsStudent = new ArrayList<>();
         for (GradeReport gradeReport:DataBase.gradeReports) {
             if (gradeReport.getStudent().equals(this))
@@ -80,5 +80,12 @@ public class Student {
                 courses.add(gradeReport.getCourse());
         }
         return courses;
+    }
+    public GradeReport getGradeReport(String nameCourse){
+        for (GradeReport g: getGradeReports()) {
+            if (g.getCourse().getName().compareToIgnoreCase(nameCourse)==0)
+                return g;
+        }
+        return null;
     }
 }

@@ -1,7 +1,4 @@
-package com.example.universityfx.Models;
-
-import java.util.Objects;
-
+package com.example.universityfx;
 public class Course {
     private String name;
     private int credits;

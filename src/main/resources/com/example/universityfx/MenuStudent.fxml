@@ -4,42 +4,36 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.example.universityfx.MenuStudent">
-    <TextField fx:id="textField_Name" editable="false" layoutX="108.0" layoutY="60.0" prefHeight="25.0"
-               prefWidth="130.0"/>
-    <TextField fx:id="textField_stdNumber" editable="false" layoutX="108.0" layoutY="97.0" prefHeight="25.0"
-               prefWidth="130.0"/>
-    <TextField fx:id="textField_Department" editable="false" layoutX="335.0" layoutY="58.0" prefHeight="25.0"
-               prefWidth="130.0"/>
-    <TextField fx:id="textField_BirthDate" editable="false" layoutX="336.0" layoutY="97.0" prefHeight="25.0"
-               prefWidth="130.0"/>
-    <Label layoutX="42.0" layoutY="63.0" text="Name :"/>
-    <Label layoutX="37.0" layoutY="101.0" text="StdNumber :"/>
-    <Label layoutX="261.0" layoutY="62.0" text="Department :"/>
-    <Label layoutX="261.0" layoutY="100.0" text="Birth Date :"/>
+<Pane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.universityfx.MenuStudent">
+    <TextField fx:id="textField_Name" editable="false" layoutX="108.0" layoutY="60.0" prefHeight="25.0" prefWidth="130.0" />
+    <TextField fx:id="textField_stdNumber" editable="false" layoutX="108.0" layoutY="97.0" prefHeight="25.0" prefWidth="130.0" />
+    <TextField fx:id="textField_Department" editable="false" layoutX="335.0" layoutY="58.0" prefHeight="25.0" prefWidth="130.0" />
+    <TextField fx:id="textField_BirthDate" editable="false" layoutX="336.0" layoutY="97.0" prefHeight="25.0" prefWidth="130.0" />
+    <Label layoutX="42.0" layoutY="63.0" text="Name :" />
+    <Label layoutX="37.0" layoutY="101.0" text="StdNumber :" />
+    <Label layoutX="261.0" layoutY="62.0" text="Department :" />
+    <Label layoutX="261.0" layoutY="100.0" text="Birth Date :" />
     <Label layoutX="201.0" layoutY="20.0" text="Menu Student">
         <font>
-            <Font name="Calibri Bold" size="18.0"/>
+            <Font name="Calibri Bold" size="18.0" />
         </font>
     </Label>
-    <TableView layoutX="36.0" layoutY="156.0" prefHeight="299.0" prefWidth="433.0">
+    <TableView fx:id="table" layoutX="36.0" layoutY="156.0" prefHeight="299.0" prefWidth="433.0">
         <columns>
-            <TableColumn prefWidth="93.70451736450195" text="Name"/>
-            <TableColumn prefWidth="91.89546966552734" text="Credits"/>
-            <TableColumn prefWidth="122.95628356933594" text="Professor"/>
-            <TableColumn prefWidth="124.0345458984375" text="Grade"/>
+            <TableColumn fx:id="column_name" prefWidth="93.70451736450195" text="Name" />
+            <TableColumn fx:id="column_credits" prefWidth="91.89546966552734" text="Credits" />
+            <TableColumn fx:id="column_professor" prefWidth="122.95628356933594" text="Professor" />
+            <TableColumn fx:id="column_grade" prefWidth="124.0345458984375" text="Grade" />
         </columns>
     </TableView>
-    <Button fx:id="btnRemove" layoutX="408.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnRemove"
-            prefHeight="25.0" prefWidth="61.0" text="Remove"/>
-    <Button fx:id="btnAdd" layoutX="340.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnAdd"
-            prefHeight="25.0" prefWidth="61.0" text="Add"/>
-    <Button fx:id="btnExit" layoutX="36.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnExit"
-            prefHeight="25.0" prefWidth="61.0" text="Exit"/>
+    <Button fx:id="btnRemove" layoutX="408.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnRemove" prefHeight="25.0" prefWidth="61.0" text="Remove" />
+    <Button fx:id="btnAdd" layoutX="340.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnAdd" prefHeight="25.0" prefWidth="61.0" text="Add" />
+    <Button fx:id="btnExit" layoutX="36.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnExit" prefHeight="25.0" prefWidth="61.0" text="Exit" />
+    <Button layoutX="105.0" layoutY="465.0" onAction="#clickBtnListCourse" mnemonicParsing="false" text="List Course" />
     <Label layoutX="38.0" layoutY="138.0" text="My Courses : ">
         <font>
-        <Font name="Calibri Bold" size="12.0"/>
+        <Font name="Calibri Bold" size="12.0" />
         </font>
     </Label>
+
 </Pane>

@@ -1,4 +1,4 @@
-package com.example.universityfx.Models;
+package com.example.universityfx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class Department {
     public List<Student> getStudent(){
         List<Student> studentsDepart = new ArrayList<>();
         for (Student s: DataBase.students) {
-            if (s.getStudent().equals(this))
+            if (s.getDepartment().equals(this))
                 studentsDepart.add(s);
         }
         return studentsDepart;

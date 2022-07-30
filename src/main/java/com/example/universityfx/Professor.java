@@ -1,4 +1,4 @@
-package com.example.universityfx.Models;
+package com.example.universityfx;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -72,5 +72,10 @@ public class Professor {
                 courses.add(c);
         }
         return courses;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
