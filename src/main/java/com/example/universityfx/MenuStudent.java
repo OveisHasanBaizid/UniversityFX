@@ -25,6 +25,8 @@ public class MenuStudent {
     @FXML
     TableColumn column_name;
     @FXML
+    TableColumn<Object, Object> column_number;
+    @FXML
     TableColumn column_credits;
     @FXML
     TableColumn column_professor;
@@ -32,6 +34,19 @@ public class MenuStudent {
     TableColumn<GradeReport, Double> column_grade;
     @FXML
     TableView<GradeReport> table;
+
+    private static Object call(Object column) {
+        return new TableCell<GradeReport, Course>() {
+            @Override
+            protected void updateItem(Course course, boolean b) {
+                super.updateItem(course, b);
+                if (b || course == null)
+                    setText("");
+                else
+                    setText(String.valueOf(course.getCredits()));
+            }
+        };
+    }
 
     public void initialize() {
         student = DataBase.studentHolder;
@@ -83,26 +98,29 @@ public class MenuStudent {
         table.setPrefWidth(300);
 
         TableColumn<Course, String> column_name = new TableColumn<>("Name");
-        column_name.setPrefWidth(100);
+        column_name.setPrefWidth(90);
         column_name.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         TableColumn<Course, String> column_credits = new TableColumn<>("Credits");
-        column_credits.setPrefWidth(100);
+        column_credits.setPrefWidth(90);
         column_credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
 
         TableColumn<Course, String> column_instructor = new TableColumn<>("Instructor");
-        column_instructor.setPrefWidth(100);
+        column_instructor.setPrefWidth(90);
         column_instructor.setCellValueFactory(new PropertyValueFactory<>("instructor"));
 
+        TableColumn<Course, String> column_number = new TableColumn<>("#");
+        column_number.setPrefWidth(30);
+        column_number.setCellFactory(new NumberTableCellFactory<>(1));
 
-        table.getColumns().addAll(column_name, column_credits, column_instructor);
+        table.getColumns().addAll(column_number,column_name, column_credits, column_instructor);
 
         ObservableList<Course> data = FXCollections.observableArrayList(DataBase.getAllCoursesDepartment(student.getDepartment()));
         table.setItems(data);
     }
 
     public void showTableMyCourse() {
-        column_grade.setCellValueFactory(new PropertyValueFactory<GradeReport, Double>("grade"));
+        column_grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
 
         column_professor.setCellValueFactory(new PropertyValueFactory<Course, String>("course"));
         column_professor.setCellFactory(column -> new TableCell<GradeReport, Course>() {
@@ -116,16 +134,7 @@ public class MenuStudent {
             }
         });
         column_credits.setCellValueFactory(new PropertyValueFactory<Course, Integer>("course"));
-        column_credits.setCellFactory(column -> new TableCell<GradeReport, Course>() {
-            @Override
-            protected void updateItem(Course course, boolean b) {
-                super.updateItem(course, b);
-                if (b || course == null)
-                    setText("");
-                else
-                    setText(String.valueOf(course.getCredits()));
-            }
-        });
+        column_credits.setCellFactory(MenuStudent::call);
         column_name.setCellValueFactory(new PropertyValueFactory<Course, String>("course"));
         column_name.setCellFactory(column -> new TableCell<GradeReport, Course>() {
             @Override
@@ -138,7 +147,7 @@ public class MenuStudent {
             }
         });
         table.setEditable(false);
-
+        column_number.setCellFactory(new NumberTableCellFactory<>(1));
         ObservableList<GradeReport> data = FXCollections.observableArrayList(student.getGradeReports());
 
         table.setItems(data);
@@ -170,10 +179,12 @@ public class MenuStudent {
         });
         Optional result = dialog.showAndWait();
         result.ifPresent(pair -> {
-            if (m.equals("Add Course"))
-                addCourse(result.toString());
-            else
-                removeCourse(result.toString());
+            if (result.isPresent()){
+                if (m.equals("Add Course"))
+                    addCourse(result.get().toString());
+                else
+                    removeCourse(result.get().toString());
+            }
         });
     }
 

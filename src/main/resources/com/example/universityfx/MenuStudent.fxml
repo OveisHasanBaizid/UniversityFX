@@ -20,16 +20,17 @@
     </Label>
     <TableView fx:id="table" layoutX="36.0" layoutY="156.0" prefHeight="299.0" prefWidth="433.0">
         <columns>
-            <TableColumn fx:id="column_name" prefWidth="93.70451736450195" text="Name" />
-            <TableColumn fx:id="column_credits" prefWidth="91.89546966552734" text="Credits" />
-            <TableColumn fx:id="column_professor" prefWidth="122.95628356933594" text="Professor" />
-            <TableColumn fx:id="column_grade" prefWidth="124.0345458984375" text="Grade" />
+         <TableColumn fx:id="column_number" prefWidth="50.39999771118164" text="#" />
+            <TableColumn fx:id="column_name" prefWidth="93.60000610351562" text="Name" />
+            <TableColumn fx:id="column_credits" prefWidth="85.19999694824219" text="Credits" />
+            <TableColumn fx:id="column_professor" prefWidth="103.5999755859375" text="Professor" />
+            <TableColumn fx:id="column_grade" prefWidth="98.79998779296875" text="Grade" />
         </columns>
     </TableView>
     <Button fx:id="btnRemove" layoutX="408.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnRemove" prefHeight="25.0" prefWidth="61.0" text="Remove" />
     <Button fx:id="btnAdd" layoutX="340.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnAdd" prefHeight="25.0" prefWidth="61.0" text="Add" />
     <Button fx:id="btnExit" layoutX="36.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnExit" prefHeight="25.0" prefWidth="61.0" text="Exit" />
-    <Button layoutX="105.0" layoutY="465.0" onAction="#clickBtnListCourse" mnemonicParsing="false" text="List Course" />
+    <Button layoutX="105.0" layoutY="465.0" mnemonicParsing="false" onAction="#clickBtnListCourse" text="List Course" />
     <Label layoutX="38.0" layoutY="138.0" text="My Courses : ">
         <font>
         <Font name="Calibri Bold" size="12.0" />

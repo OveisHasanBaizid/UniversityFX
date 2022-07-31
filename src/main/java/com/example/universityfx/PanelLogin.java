@@ -20,24 +20,38 @@ public class PanelLogin {
     private Button btnGod , btnStudent , btnProfessor , btnDepartmentOfficer , btnExit;
 
     @FXML
-    public void clickBtnProfessor() {
-
+    public void clickBtnProfessor() throws IOException {
+        temp();
+        String[] info = display("Name" , "Department");
+        Professor professor = DataBase.getProfessor(info[0]);
+        if (professor==null || !professor.getDepartment().equals(DataBase.getDepartment(info[1])))
+            showMessage("The information entered is incorrect.");
+        else{
+            DataBase.professorHolder = professor;
+            Stage stage = (Stage) btnProfessor.getScene().getWindow();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuProfessor.fxml")));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
     public void temp(){
-        Department department = new Department("KCSnk","1");
+        Department department = new Department("k","1");
         Student student = new Student("9817023116","Oveis", LocalDate.now(),department);
-        Professor professor = new Professor("professor1",LocalDate.now(),department,AcademicRank.PROFESSOR);
+        Professor professor = new Professor("p",LocalDate.now(),department,AcademicRank.PROFESSOR);
         Course course = new Course("Course1",4,department,professor);
         DataBase.courses.add(course);
         DataBase.students.add(student);
-        DataBase.gradeReports.add(new GradeReport(student,course));
+        DataBase.professors.add(professor);
+        DataBase.departments.add(department);
+        student.takeCourse(course);
     }
     @FXML
     public void clickBtnStudent() throws IOException {
         temp();
-        String[] info = display();
+        String[] info = display("Name" , "Student Number");
         Student student = DataBase.getStudent(info[1]);
-        if (student==null)
+        if (student==null || student.getName().compareToIgnoreCase(info[0])!=0)
             showMessage("The information entered is incorrect.");
         else{
             DataBase.studentHolder = student;
@@ -60,7 +74,7 @@ public class PanelLogin {
     public void clickBtnExit() {
         System.exit(0);
     }
-    public static String[] display() {
+    public static String[] display(String s1 , String s2) {
         final String[] username_password = new String[2];
 
         Stage stage = new Stage();
@@ -77,8 +91,8 @@ public class PanelLogin {
             stage.close();
         });
 
-        Label label2 = new Label("Name:");
-        Label label3 = new Label("Student Number:");
+        Label label2 = new Label(s1+":");
+        Label label3 = new Label(s2+":");
 
         GridPane layout = new GridPane();
 

@@ -1,9 +1,11 @@
 package com.example.universityfx;
+
 public class Course {
     private String name;
     private int credits;
     private Department department;
     private Professor instructor;
+    private int numberStudent;
 
     public Course(String name) {
         this.name = name;
@@ -14,6 +16,7 @@ public class Course {
         setCredits(credits);
         this.department = department;
         this.instructor = instructor;
+        this.numberStudent = 0;
     }
 
     public String getName() {
@@ -29,7 +32,7 @@ public class Course {
     }
 
     public void setCredits(int credits) {
-        if (credits>0 && credits<=6)
+        if (credits > 0 && credits <= 6)
             this.credits = credits;
         else
             this.credits = 3;
@@ -44,6 +47,8 @@ public class Course {
     }
 
     public Professor getInstructor() {
+        if (instructor==null)
+            return new Professor("Null");
         return instructor;
     }
 
@@ -51,6 +56,19 @@ public class Course {
         this.instructor = instructor;
     }
 
+    public int getNumberStudent() {
+        return numberStudent;
+    }
+
+    public void setNumberStudent(int numberStudent) {
+        this.numberStudent = numberStudent;
+    }
+    public void increaseParticipants(){
+        numberStudent++;
+    }
+    public void decreaseParticipants(){
+        numberStudent--;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,4 +79,5 @@ public class Course {
                 && department.equals(course.department)
                 && instructor.equals(course.instructor);
     }
+
 }

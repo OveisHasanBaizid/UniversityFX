@@ -51,6 +51,7 @@ public class Student {
 
     public void takeCourse(Course course){
         DataBase.gradeReports.add(new GradeReport(this,course));
+        course.increaseParticipants();
     }
     public int finishCourse(Course course , double grade){
         if (grade<0 || grade>20)
@@ -63,6 +64,7 @@ public class Student {
                 break;
             }
         }
+        course.decreaseParticipants();
         return 0;
     }
     public List<GradeReport> getGradeReports(){

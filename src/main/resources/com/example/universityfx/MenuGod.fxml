@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.universityfx.MenuGod"
+            prefHeight="400.0" prefWidth="600.0">
+    <Label layoutX="199.0" layoutY="40.0" prefHeight="31.0" prefWidth="105.0" text="Menu God">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <Button layoutX="186.0" layoutY="110.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Manage Students" />
+    <Button layoutX="186.0" layoutY="180.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Manage Courses" />
+    <Button layoutX="186.0" layoutY="250.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Manage Professor" />
+    <Button layoutX="186.0" layoutY="320.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Manage Department" />
+    <Button layoutX="186.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="130.0" text="Exit" />
+</AnchorPane>
