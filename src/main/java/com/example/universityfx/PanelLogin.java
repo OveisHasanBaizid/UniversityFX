@@ -19,9 +19,12 @@ public class PanelLogin {
     @FXML
     private Button btnGod , btnStudent , btnProfessor , btnDepartmentOfficer , btnExit;
 
+    public void initialize(){
+        temp();
+    }
     @FXML
     public void clickBtnProfessor() throws IOException {
-        temp();
+
         String[] info = display("Name" , "Department");
         Professor professor = DataBase.getProfessor(info[0]);
         if (professor==null || !professor.getDepartment().equals(DataBase.getDepartment(info[1])))
@@ -37,14 +40,16 @@ public class PanelLogin {
     }
     public void temp(){
         Department department = new Department("k","1");
-        Student student = new Student("9817023116","Oveis", LocalDate.now(),department);
+        Student student1 = new Student("9817023116","Oveis", LocalDate.now(),department);
+        Student student2 = new Student("98","Ov", LocalDate.now(),department);
         Professor professor = new Professor("p",LocalDate.now(),department,AcademicRank.PROFESSOR);
         Course course = new Course("Course1",4,department,professor);
         DataBase.courses.add(course);
-        DataBase.students.add(student);
+        DataBase.students.add(student1);
+        DataBase.students.add(student2);
         DataBase.professors.add(professor);
         DataBase.departments.add(department);
-        student.takeCourse(course);
+        student1.takeCourse(course);
     }
     @FXML
     public void clickBtnStudent() throws IOException {
@@ -63,8 +68,12 @@ public class PanelLogin {
         }
     }
     @FXML
-    public void clickBtnGod(){
-
+    public void clickBtnGod() throws IOException {
+        Stage stage = (Stage) btnGod.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuGod.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void clickBtnDepartmentOfficer() {
