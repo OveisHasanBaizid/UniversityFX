@@ -15,30 +15,27 @@ public class MenuGod {
     Button btnManageStudents , btnManageCourses , btnManageProfessors, btnManageDepartments , btnExit;
     @FXML
     public void clickBtnManageStudents() throws IOException {
-        Stage stage = (Stage) btnManageStudents.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManageStudents.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("ManageStudents.fxml");
     }
     @FXML
     public void clickBtnManageCourses() throws IOException {
-        Stage stage = (Stage) btnManageCourses.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManageCourses.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("ManageCourses.fxml");
     }
     @FXML
-    public void clickBtnManageProfessors() {
+    public void clickBtnManageProfessors() throws IOException {
+        nextPage("ManageProfessors.fxml");
     }
     @FXML
-    public void clickBtnManageDepartments() {
+    public void clickBtnManageDepartments() throws IOException {
+        nextPage("ManageDepartments.fxml");
     }
     @FXML
     public void clickBtnExit() throws IOException {
+        nextPage("PanelLogin.fxml");
+    }
+    public void nextPage(String namePage) throws IOException {
         Stage stage = (Stage) btnExit.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("PanelLogin.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(namePage)));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

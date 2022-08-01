@@ -35,6 +35,7 @@ public class AddStudent {
         SpinnerValueFactory<String> valueFactory = //
                 new SpinnerValueFactory.ListSpinnerValueFactory<>(depart);
         spinner.setValueFactory(valueFactory);
+
     }
 
     @FXML

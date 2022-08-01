@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.universityfx.AddDepartment">
+    <Label layoutX="188.0" layoutY="38.0" text="Add Department">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <Label layoutX="134.0" layoutY="190.0" text="Name : " />
+    <Button fx:id="btnBack" layoutX="62.0" layoutY="418.0" mnemonicParsing="false" onAction="#clickBtnBack" prefHeight="39.0" prefWidth="62.0" text="Back" />
+    <Button fx:id="btnSave" layoutX="383.0" layoutY="418.0" mnemonicParsing="false" onAction="#clickBtnSave" prefHeight="39.0" prefWidth="53.0" text="Save" />
+    <TextField fx:id="textField_name" layoutX="202.0" layoutY="177.0" />
+    <Label layoutX="154.0" layoutY="254.0" text="ID : " />
+    <TextField fx:id="textField_ID" layoutX="202.0" layoutY="250.0" />
+</Pane>

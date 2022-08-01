@@ -53,7 +53,13 @@ public class Professor {
     public void setRank(AcademicRank rank) {
         this.rank = rank;
     }
-
+    public static AcademicRank getRank(String s){
+        if (s.equals("PROFESSOR"))
+            return AcademicRank.PROFESSOR;
+        if (s.equals("ASSISTANT_PROFESSOR"))
+            return AcademicRank.ASSISTANT_PROFESSOR;
+        return AcademicRank.ASSOCIATE_PROFESSOR;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
