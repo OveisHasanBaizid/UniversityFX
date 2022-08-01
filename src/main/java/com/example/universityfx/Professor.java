@@ -60,6 +60,7 @@ public class Professor {
         if (o == null || getClass() != o.getClass()) return false;
         Professor professor = (Professor) o;
         return Objects.equals(name, professor.name)
+                && birthDate!=null && professor.birthDate!=null
                 && birthDate.equals(professor.birthDate)
                 && department.equals(professor.department)
                 && rank == professor.rank;

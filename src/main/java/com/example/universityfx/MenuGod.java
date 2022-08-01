@@ -22,7 +22,12 @@ public class MenuGod {
         stage.show();
     }
     @FXML
-    public void clickBtnManageCourses() {
+    public void clickBtnManageCourses() throws IOException {
+        Stage stage = (Stage) btnManageCourses.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ManageCourses.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     public void clickBtnManageProfessors() {

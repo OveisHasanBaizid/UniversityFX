@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.universityfx.ManageCourses"
+      prefHeight="500.0" prefWidth="500.0">
+    <Label layoutX="163.0" layoutY="35.0" text="Manage Courses">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <TableView fx:id="table" layoutX="38.0" layoutY="96.0" prefHeight="342.0" prefWidth="424.0">
+        <columns>
+            <TableColumn fx:id="columnNumber" prefWidth="44.0" text="#" />
+            <TableColumn fx:id="columnName" prefWidth="70.40003204345703" text="Name" />
+            <TableColumn fx:id="columnCredits" prefWidth="56.0" text="Credits" />
+            <TableColumn fx:id="columnDepartment" prefWidth="93.5999755859375" text="Department" />
+            <TableColumn fx:id="columnInstructor" prefWidth="74.4000244140625" text="Instructor" />
+            <TableColumn fx:id="columnNStudent" prefWidth="86.39996337890625" text="NStudent" />
+        </columns>
+    </TableView>
+    <Button fx:id="btnExit" onAction="#clickBtnExit" layoutX="38.0" layoutY="453.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" text="Exit" />
+    <Button fx:id="btnAdd" onAction="#clickBtnAdd" layoutX="402.0" layoutY="453.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Add" />
+</Pane>
