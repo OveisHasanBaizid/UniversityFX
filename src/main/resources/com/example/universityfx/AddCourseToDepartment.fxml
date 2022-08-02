@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Font?>
+<Pane xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.universityfx.AddCourseToDepartment"
+      prefHeight="500.0" prefWidth="500.0">
+    <Label layoutX="188.0" layoutY="38.0" text="Add Course">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <Label  layoutX="134.0" layoutY="151.0" text="Name : " />
+    <Button fx:id="btnBack" onAction="#clickBtnBack" layoutX="62.0" layoutY="418.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="62.0" text="Back" />
+    <Button fx:id="btnSave" onAction="#clickBtnSave" layoutX="383.0" layoutY="418.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="53.0" text="Save" />
+    <TextField fx:id="textField_name" layoutX="202.0" layoutY="147.0" />
+    <Label layoutX="132.0" layoutY="221.0" text="Credits : " />
+    <TextField fx:id="textField_credits" layoutX="202.0" layoutY="217.0" />
+</Pane>

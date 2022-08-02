@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.universityfx.MenuCoursesDepartment">
+    <Label layoutX="152.0" layoutY="33.0" text="Menu Departments">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <Label layoutX="33.0" layoutY="89.0" text="Name Department : " />
+    <Label layoutX="330.0" layoutY="89.0" text="ID : " />
+    <Label layoutX="77.0" layoutY="134.0" text="N Courses : " />
+    <Label layoutX="277.0" layoutY="134.0" text="N Professors : " />
+    <TextField fx:id="textField_Name" editable="false" layoutX="147.0" layoutY="85.0" prefHeight="25.0" prefWidth="108.0" />
+    <TextField fx:id="textField_NCourse" editable="false" layoutX="148.0" layoutY="130.0" prefHeight="25.0" prefWidth="108.0" />
+    <TextField fx:id="textField_ID" editable="false" layoutX="353.0" layoutY="85.0" prefHeight="25.0" prefWidth="108.0" />
+    <TextField fx:id="textField_NProfessor" editable="false" layoutX="353.0" layoutY="130.0" prefHeight="25.0" prefWidth="108.0" />
+    <TableView fx:id="table" layoutX="38.0" layoutY="184.0" prefHeight="266.0" prefWidth="424.0">
+        <columns>
+            <TableColumn fx:id="columnNumber" prefWidth="44.0" text="#" />
+            <TableColumn fx:id="columnName" prefWidth="98.20001220703125" text="Name" />
+            <TableColumn fx:id="columnCredits" prefWidth="83.0" text="Credits" />
+            <TableColumn fx:id="columnInstructor" prefWidth="114.199951171875" text="Instructor" />
+            <TableColumn fx:id="columnNStudent" prefWidth="85.0" text="NStudent" />
+        </columns>
+    </TableView>
+    <Label layoutX="38.0" layoutY="167.0" text="Courses : " />
+    <Button onAction="#clickBtnExit" fx:id="btnExit" layoutX="28.0" layoutY="461.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Exit" />
+    <Button layoutX="398.0" layoutY="461.0" mnemonicParsing="false" onAction="#clickBtnAddCourse" prefHeight="30.0" prefWidth="80.0" text="Add Course" />
+</Pane>

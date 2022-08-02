@@ -10,8 +10,10 @@ public class DataBase {
     public static ArrayList<Department> departments = new ArrayList<>();
     public static ArrayList<Professor> professors = new ArrayList<>();
 
+
     public static Student studentHolder = null;
     public static Professor professorHolder = null;
+    public static Department departmentHolder = null;
 
     public static Student getStudent(String studentNumber){
         for (Student s:students) {

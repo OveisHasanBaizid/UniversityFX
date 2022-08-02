@@ -14,76 +14,94 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Optional;
 
 public class PanelLogin {
     @FXML
-    private Button btnGod , btnStudent , btnProfessor , btnDepartmentOfficer , btnExit;
+    private Button btnExit;
 
     public void initialize(){
-        temp();
     }
     @FXML
     public void clickBtnProfessor() throws IOException {
 
-        String[] info = display("Name" , "Department");
+        String[] info = showDialog_2_input("Name" , "Department");
         Professor professor = DataBase.getProfessor(info[0]);
         if (professor==null || !professor.getDepartment().equals(DataBase.getDepartment(info[1])))
             showMessage("The information entered is incorrect.");
         else{
             DataBase.professorHolder = professor;
-            Stage stage = (Stage) btnProfessor.getScene().getWindow();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuProfessor.fxml")));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            nextPage("MenuProfessor.fxml");
         }
     }
-    public void temp(){
-        Department department = new Department("k","1");
-        Student student1 = new Student("9817023116","Oveis", LocalDate.now(),department);
-        Student student2 = new Student("98","Ov", LocalDate.now(),department);
-        Professor professor = new Professor("p",LocalDate.now(),department,AcademicRank.PROFESSOR);
-        Course course = new Course("Course1",4,department,professor);
-        DataBase.courses.add(course);
-        DataBase.students.add(student1);
-        DataBase.students.add(student2);
-        DataBase.professors.add(professor);
-        DataBase.departments.add(department);
-        student1.takeCourse(course);
-    }
+
     @FXML
     public void clickBtnStudent() throws IOException {
-        temp();
-        String[] info = display("Name" , "Student Number");
+        String[] info = showDialog_2_input("Name" , "Student Number");
         Student student = DataBase.getStudent(info[1]);
         if (student==null || student.getName().compareToIgnoreCase(info[0])!=0)
             showMessage("The information entered is incorrect.");
         else{
             DataBase.studentHolder = student;
-            Stage stage = (Stage) btnStudent.getScene().getWindow();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuStudent.fxml")));
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            nextPage("MenuStudent.fxml");
         }
     }
     @FXML
     public void clickBtnGod() throws IOException {
-        Stage stage = (Stage) btnGod.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuGod.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("MenuGod.fxml");
     }
     @FXML
-    public void clickBtnDepartmentOfficer() {
-
+    public void clickBtnDepartmentOfficer() throws IOException {
+        String s = showDialog_1_input("Login Department");
+        if (!s.isEmpty()){
+            Department department = DataBase.getDepartment(s);
+            if (department==null)
+                showMessage("The entered department name is incorrect");
+            else{
+                DataBase.departmentHolder = department;
+                nextPage("MenuCoursesDepartment.fxml");
+            }
+        }
     }
     @FXML
     public void clickBtnExit() {
         System.exit(0);
     }
-    public static String[] display(String s1 , String s2) {
+    public String showDialog_1_input(String m) {
+        Dialog dialog = new Dialog();
+        String[] input = new String[1];
+        dialog.setHeaderText(null);
+        dialog.setTitle(m);
+        dialog.setResizable(true);
+        Label label1 = new Label("Department Name : ");
+        TextField text1 = new TextField();
+
+        GridPane grid = new GridPane();
+        grid.add(label1, 1, 1);
+        grid.add(text1, 2, 1);
+        dialog.getDialogPane().setContent(grid);
+
+        ButtonType buttonTypeOk = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCANCEL = new ButtonType("CANCEL", ButtonBar.ButtonData.CANCEL_CLOSE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeCANCEL);
+
+        dialog.setResultConverter(dialogButton -> {
+            if (dialogButton == buttonTypeOk) {
+                return text1.getText();
+            }
+            return null;
+        });
+        Optional result = dialog.showAndWait();
+        result.ifPresent(pair -> {
+            if (result.isPresent()){
+                input[0] = result.get().toString();
+
+            }
+        });
+        return input[0];
+    }
+    public static String[] showDialog_2_input(String s1 , String s2) {
         final String[] username_password = new String[2];
 
         Stage stage = new Stage();
@@ -130,5 +148,12 @@ public class PanelLogin {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    public void nextPage(String namePage) throws IOException {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(namePage)));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

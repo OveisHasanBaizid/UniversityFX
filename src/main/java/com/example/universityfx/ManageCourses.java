@@ -18,17 +18,7 @@ import java.util.Objects;
 
 public class ManageCourses {
     @FXML
-    TableColumn columnNumber;
-    @FXML
-    TableColumn columnName;
-    @FXML
-    TableColumn columnCredits;
-    @FXML
-    TableColumn columnDepartment;
-    @FXML
-    TableColumn columnInstructor;
-    @FXML
-    TableColumn columnNStudent;
+    TableColumn columnNumber , columnName , columnCredits , columnDepartment , columnInstructor , columnNStudent;
     @FXML
     TableView<Course> table;
     @FXML

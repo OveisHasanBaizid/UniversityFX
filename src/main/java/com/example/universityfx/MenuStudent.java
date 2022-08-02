@@ -194,7 +194,7 @@ public class MenuStudent {
             showMessage("You have already taken this course.", "Error");
         else {
             student.takeCourse(course);
-            showMessage("Lesson added successfully.", "Message");
+            showMessage("Course added successfully.", "Message");
             showTableMyCourse();
         }
     }

@@ -48,11 +48,21 @@ public class Department {
         }
         return studentsDepart;
     }
+    public List<Course> getCourses(){
+        List<Course> courses = new ArrayList<>();
+        for (Course c: DataBase.courses) {
+            if (c.getDepartment().equals(this))
+                courses.add(c);
+        }
+        return courses;
+    }
     public List<Professor> getFaculty(){
         List<Professor> professors = new ArrayList<>();
         for (Course c: DataBase.courses) {
-            if (c.getDepartment().equals(this))
+            if (c.getDepartment().equals(this) && (!c.getInstructor().getName().equals("Null"))){
                 professors.add(c.getInstructor());
+            }
+
         }
         return professors;
     }
