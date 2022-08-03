@@ -18,7 +18,7 @@
     <TextField fx:id="textField_NCourse" editable="false" layoutX="148.0" layoutY="130.0" prefHeight="25.0" prefWidth="108.0" />
     <TextField fx:id="textField_ID" editable="false" layoutX="353.0" layoutY="85.0" prefHeight="25.0" prefWidth="108.0" />
     <TextField fx:id="textField_NProfessor" editable="false" layoutX="353.0" layoutY="130.0" prefHeight="25.0" prefWidth="108.0" />
-    <TableView fx:id="table" layoutX="38.0" layoutY="184.0" prefHeight="266.0" prefWidth="424.0">
+    <TableView fx:id="table" onMouseClicked="#clickItemTable" layoutX="38.0" layoutY="184.0" prefHeight="266.0" prefWidth="424.0">
         <columns>
             <TableColumn fx:id="columnNumber" prefWidth="44.0" text="#" />
             <TableColumn fx:id="columnName" prefWidth="98.20001220703125" text="Name" />

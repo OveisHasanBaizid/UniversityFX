@@ -17,15 +17,7 @@ public class ManageStudents {
     @FXML
     Button btnExit, btnAdd;
     @FXML
-    TableColumn<Object, Object> columnNumber;
-    @FXML
-    TableColumn<Object, Object> columnName;
-    @FXML
-    TableColumn<Object, Object> columnStudentNumber;
-    @FXML
-    TableColumn<Object, Object> columnBirthDate;
-    @FXML
-    TableColumn columnDepartment;
+    TableColumn columnNumber , columnName , columnStudentNumber , columnBirthDate , columnDepartment;
     @FXML
     TableView<Student> table;
 
@@ -35,20 +27,12 @@ public class ManageStudents {
 
     @FXML
     public void clickBtnExit() throws IOException {
-        Stage stage = (Stage) btnExit.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuGod.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("MenuGod.fxml");
     }
 
     @FXML
     public void clickBtnAdd() throws IOException {
-        Stage stage = (Stage) btnExit.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AddStudent.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("AddStudent.fxml");
     }
 
     public void showTableStudent() {
@@ -74,5 +58,12 @@ public class ManageStudents {
         table.setEditable(false);
         ObservableList<Student> data = FXCollections.observableArrayList(DataBase.students);
         table.setItems(data);
+    }
+    public void nextPage(String namePage) throws IOException {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(namePage)));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

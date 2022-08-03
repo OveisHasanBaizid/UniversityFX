@@ -25,22 +25,15 @@ public class ManageCourses {
     Button btnExit , btnAdd;
     public void initialize() {
         showTableCourses();
+
     }
     @FXML
     public void clickBtnExit() throws IOException {
-        Stage stage = (Stage) btnExit.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("MenuGod.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("MenuGod.fxml");
     }
     @FXML
     public void clickBtnAdd() throws IOException {
-        Stage stage = (Stage) btnAdd.getScene().getWindow();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("AddCourse.fxml")));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        nextPage("AddCourse.fxml");
     }
     public void showTableCourses() {
         columnNumber.setCellFactory(new NumberTableCellFactory<>(1));
@@ -77,5 +70,12 @@ public class ManageCourses {
 
         ObservableList<Course> data = FXCollections.observableArrayList(DataBase.courses);
         table.setItems(data);
+    }
+    public void nextPage(String namePage) throws IOException {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(namePage)));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

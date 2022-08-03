@@ -10,17 +10,19 @@ public class Student {
     private LocalDate birthDate;
     private Department department;
 
-    public Student(String student) {
-        this.student = student;
-    }
-
     public Student(String student, String name, LocalDate birthDate, Department department) {
         this.student = student;
         this.name = name;
         this.birthDate = birthDate;
         this.department = department;
     }
-
+    public Student(String line) {
+        String[] array = line.split(",");
+        this.student = array[0];
+        this.name = array[1];
+        this.birthDate = LocalDate.parse(array[2]);
+        this.department = DataBase.getDepartment(array[3]);
+    }
     public String getStudent() {
         return student;
     }
@@ -89,5 +91,8 @@ public class Student {
                 return g;
         }
         return null;
+    }
+    public String coder(){
+        return student+","+name+","+birthDate+","+department.getName();
     }
 }

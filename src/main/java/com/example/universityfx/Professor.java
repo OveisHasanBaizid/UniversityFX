@@ -11,8 +11,15 @@ public class Professor {
     private Department department;
     private AcademicRank rank;
 
-    public Professor(String name) {
-        this.name = name;
+    public Professor() {
+        this.birthDate = LocalDate.now();
+    }
+    public Professor(String line) {
+        String array[] = line.split(",");
+        this.name = array[0];
+        this.birthDate = LocalDate.parse(array[1]);
+        this.department = DataBase.getDepartment(array[2]);
+        this.rank = getRank(array[3]);
     }
 
     public Professor(String name, LocalDate birthDate, Department department, AcademicRank rank) {
@@ -66,7 +73,7 @@ public class Professor {
         if (o == null || getClass() != o.getClass()) return false;
         Professor professor = (Professor) o;
         return Objects.equals(name, professor.name)
-                && birthDate!=null && professor.birthDate!=null
+                && birthDate!=null && professor.birthDate!=null && department!=null
                 && birthDate.equals(professor.birthDate)
                 && department.equals(professor.department)
                 && rank == professor.rank;
@@ -84,5 +91,9 @@ public class Professor {
     @Override
     public String toString() {
         return name;
+    }
+
+    public String coder(){
+        return name+","+birthDate+","+department.getName()+","+rank;
     }
 }

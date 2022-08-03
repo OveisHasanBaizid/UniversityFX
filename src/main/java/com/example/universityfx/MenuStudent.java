@@ -23,15 +23,7 @@ public class MenuStudent {
     @FXML
     TextField textField_Name, textField_stdNumber, textField_BirthDate, textField_Department;
     @FXML
-    TableColumn column_name;
-    @FXML
-    TableColumn<Object, Object> column_number;
-    @FXML
-    TableColumn column_credits;
-    @FXML
-    TableColumn column_professor;
-    @FXML
-    TableColumn<GradeReport, Double> column_grade;
+    TableColumn column_name , column_number , column_credits , column_professor , column_grade;
     @FXML
     TableView<GradeReport> table;
 
@@ -180,25 +172,36 @@ public class MenuStudent {
         Optional result = dialog.showAndWait();
         result.ifPresent(pair -> {
             if (result.isPresent()){
-                if (m.equals("Add Course"))
-                    addCourse(result.get().toString());
-                else
-                    removeCourse(result.get().toString());
+                if (m.equals("Add Course")) {
+                    try {
+                        addCourse(result.get().toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+                    try {
+                        removeCourse(result.get().toString());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
 
-    public void addCourse(String nameCourse) {
+    public void addCourse(String nameCourse) throws IOException {
         Course course = DataBase.getCourse(nameCourse);
         if (student.getCourse().contains(course))
             showMessage("You have already taken this course.", "Error");
         else {
             student.takeCourse(course);
+            DataBase.writeGradeReports();
             showMessage("Course added successfully.", "Message");
             showTableMyCourse();
         }
     }
-    public void removeCourse(String nameCourse) {
+    public void removeCourse(String nameCourse) throws IOException {
         Course course = DataBase.getCourse(nameCourse);
         if (course==null){
             showMessage("The desired course is not available in list courses", "Error");
@@ -210,6 +213,7 @@ public class MenuStudent {
                 showMessage("This lesson has already finished and it is not possible to delete it", "Error");
             }else{
                 DataBase.gradeReports.remove(gradeReport);
+                DataBase.writeGradeReports();
                 showMessage("The desired lesson was successfully deleted.", "Message");
                 showTableMyCourse();
             }

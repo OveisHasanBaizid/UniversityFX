@@ -9,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,6 +36,15 @@ public class MenuCoursesDepartment {
         textField_NProfessor.setText(String.valueOf(department.getFaculty().size()));
 
         showTableCourses();
+    }
+    public void clickItemTable(MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+            if (mouseEvent.getClickCount() == 2 && !table.getSelectionModel().isEmpty()) {
+                Course course = table.getSelectionModel().getSelectedItem();
+                DataBase.courseHolder = course;
+                nextPage("MenuStudentsCoursesDepartment.fxml");
+            }
+        }
     }
     @FXML
     public void clickBtnExit() throws IOException {

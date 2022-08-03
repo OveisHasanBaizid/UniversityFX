@@ -8,13 +8,14 @@ public class Department {
     private String name;
     private String id;
 
-    public Department(String name) {
-        this.name = name;
-    }
-
     public Department(String name, String id) {
         this.name = name;
         this.id = id;
+    }
+    public Department(String line) {
+        String array[] = line.split(",");
+        this.name = array[0];
+        this.id = array[1];
     }
 
     public String getName() {
@@ -65,5 +66,8 @@ public class Department {
 
         }
         return professors;
+    }
+    public String coder(){
+        return name+","+id;
     }
 }

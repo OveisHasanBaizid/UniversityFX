@@ -1,7 +1,4 @@
 package com.example.universityfx;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +8,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class AddDepartment {
     @FXML
@@ -34,6 +32,7 @@ public class AddDepartment {
         }else{
             Department department = new Department(textField_name.getText(),textField_ID.getText());
             DataBase.departments.add(department);
+            DataBase.writeDepartments();
             showMessage("New department added successfully.","Message");
 
             nextPage("ManageDepartments.fxml");

@@ -1,5 +1,9 @@
 package com.example.universityfx;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Course {
     private String name;
     private int credits;
@@ -7,8 +11,13 @@ public class Course {
     private Professor instructor;
     private int numberStudent;
 
-    public Course(String name) {
-        this.name = name;
+    public Course(String line) {
+        String[] array = line.split(",");
+        this.name = array[0];
+        setCredits(Integer.parseInt(array[1]));
+        this.department = DataBase.getDepartment(array[2]);
+        this.instructor = array[3].equals("Null")?null: DataBase.getProfessor(array[3]);
+        this.numberStudent = Integer.parseInt(array[4]);
     }
 
     public Course(String name, int credits, Department department, Professor instructor) {
@@ -48,7 +57,7 @@ public class Course {
 
     public Professor getInstructor() {
         if (instructor==null)
-            return new Professor("Null");
+            return new Professor("Null", LocalDate.now(),department,null);
         return instructor;
     }
 
@@ -79,5 +88,15 @@ public class Course {
                 && department.equals(course.department)
                 && instructor.equals(course.instructor);
     }
-
+    public List<Student> getStudents(){
+        List<Student> students = new ArrayList<>();
+        for (GradeReport g:DataBase.gradeReports) {
+            if (g.getCourse().equals(this))
+                students.add(g.getStudent());
+        }
+        return students;
+    }
+    public String coder(){
+        return name+","+credits+","+department.getName()+","+(instructor==null?"Null":instructor.getName())+","+numberStudent;
+    }
 }

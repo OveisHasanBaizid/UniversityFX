@@ -122,11 +122,7 @@ public class MenuProfessor {
     }
 
     @FXML
-    public void clickBtnAdd() {
-        if (table.getSelectionModel() != null) {
-            Course course = table.getSelectionModel().getSelectedItem();
-            System.out.println(course.getName());
-        }
+    public void clickBtnAdd() throws IOException {
         addCourse(showDialog_1_input("Add Course")[0]);
     }
 
@@ -311,18 +307,19 @@ public class MenuProfessor {
         return grade;
     }
 
-    public void addCourse(String nameCourse) {
+    public void addCourse(String nameCourse) throws IOException {
         System.out.println(nameCourse);
         Course course = DataBase.getCourse(nameCourse);
         if (course == null)
             showMessage("There is no course with this name.", "Error");
-        else if (course.getInstructor() != null) {
+        else if (course.getInstructor() != null && !course.getInstructor().getName().equals("Null")) {
             if (course.getInstructor().equals(professor))
                 showMessage("This course is offered by you.", "Message");
             else
                 showMessage("This course is offered by another professor.", "Message");
         } else {
             course.setInstructor(professor);
+            DataBase.writeCourses();
             showTableMyCourse();
             showMessage("Course added successfully.", "Message");
         }

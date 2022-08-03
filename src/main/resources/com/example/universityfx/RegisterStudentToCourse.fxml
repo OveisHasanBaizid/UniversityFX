@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.universityfx.RegisterStudentToCourse">
+    <Label layoutX="188.0" layoutY="38.0" text="Register Student">
+        <font>
+            <Font name="Calibri Bold" size="24.0" />
+        </font>
+    </Label>
+    <Label layoutX="158.0" layoutY="164.0" text="Name : " />
+    <Button fx:id="btnBack" layoutX="62.0" layoutY="418.0" mnemonicParsing="false" onAction="#clickBtnBack" prefHeight="39.0" prefWidth="62.0" text="Back" />
+    <Button fx:id="btnSave" layoutX="383.0" layoutY="418.0" mnemonicParsing="false" onAction="#clickBtnSave" prefHeight="39.0" prefWidth="53.0" text="Save" />
+    <TextField fx:id="textField_Name" layoutX="214.0" layoutY="160.0" />
+    <Label layoutX="111.0" layoutY="228.0" text="Student Number : " />
+    <TextField fx:id="textField_StudentNumber" layoutX="221.0" layoutY="224.0" />
+    <DatePicker fx:id="datePicker" layoutX="202.0" layoutY="299.0" />
+    <Label layoutX="124.0" layoutY="302.0" text="Birth Date : " />
+</Pane>

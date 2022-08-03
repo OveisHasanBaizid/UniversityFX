@@ -56,6 +56,7 @@ public class AddCourse {
             Course course = new Course(textField_name.getText(),Integer.parseInt(textField_credits.getText())
                     ,DataBase.getDepartment(spinner.getValue()),null);
             DataBase.courses.add(course);
+            DataBase.writeCourses();
             showMessage("New course added successfully.","Message");
 
             Stage stage = (Stage) btnSave.getScene().getWindow();

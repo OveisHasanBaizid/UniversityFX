@@ -10,6 +10,12 @@ public class GradeReport {
         this.course = course;
         this.grade = -1;
     }
+    public GradeReport(String line) {
+        String[] array = line.split(",");
+        this.student = DataBase.getStudent(array[0]);
+        this.course = DataBase.getCourse(array[1]);
+        this.grade = Double.parseDouble(array[2]);
+    }
 
     public Student getStudent() {
         return student;
@@ -30,5 +36,9 @@ public class GradeReport {
     @Override
     public String toString() {
         return student + " > : " + course + " -> " + grade;
+    }
+
+    public String coder(){
+        return student.getStudent()+","+course.getName()+","+grade;
     }
 }

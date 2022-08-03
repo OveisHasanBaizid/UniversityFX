@@ -10,9 +10,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -20,8 +18,6 @@ public class PanelLogin {
     @FXML
     private Button btnExit;
 
-    public void initialize(){
-    }
     @FXML
     public void clickBtnProfessor() throws IOException {
 
@@ -53,7 +49,7 @@ public class PanelLogin {
     @FXML
     public void clickBtnDepartmentOfficer() throws IOException {
         String s = showDialog_1_input("Login Department");
-        if (!s.isEmpty()){
+        if (s!=null){
             Department department = DataBase.getDepartment(s);
             if (department==null)
                 showMessage("The entered department name is incorrect");
@@ -96,7 +92,6 @@ public class PanelLogin {
         result.ifPresent(pair -> {
             if (result.isPresent()){
                 input[0] = result.get().toString();
-
             }
         });
         return input[0];
